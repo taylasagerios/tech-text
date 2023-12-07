@@ -13,20 +13,15 @@ const initdb = async () =>
     },
   });
 
-export const putDb = async (name, home, cell, email)  => {
-  console.log('Put to the database');
-
-  const contactDb = await openDB('jate', 1);
-
-  const tx = contactDb.transaction('jate', 'readwrite');
-
-  const store = tx.objectStore('jate');
-
-  const request = store.add({ name: name, home_phone: home, cell_phone: cell, email: email });
-
-  const result = await request;
-  console.log('Data saved to the database', result);
-};
+  export const putDb = async (content) => {
+    console.log('PUT to the database');
+    const todosDb = await openDB('todos', 1);
+    const tx = todosDb.transaction('todos', 'readwrite');
+    const store = tx.objectStore('todos');
+    const request = store.put({ id: id, todo: content });
+    const result = await request;
+    console.log('Data saved to the database', result);
+  };
 ;
 
 export const getDb = async () => {
